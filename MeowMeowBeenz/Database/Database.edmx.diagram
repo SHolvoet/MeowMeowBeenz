@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9a31c3a20d1a47779246244448f084c7" Name="Diagram1">
+        <EntityTypeShape EntityType="MeowMeowBeenzDbModel.Gebruiker" Width="1.5" PointX="3.875" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeowMeowBeenzDbModel.GebruikerGroep" Width="1.5" PointX="7" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeowMeowBeenzDbModel.GebruikerPunten" Width="1.5" PointX="3.875" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeowMeowBeenzDbModel.Groep" Width="1.5" PointX="7.375" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="MeowMeowBeenzDbModel.FK_GebruikerGroep_Gebruiker" ManuallyRouted="false" />
+        <AssociationConnector Association="MeowMeowBeenzDbModel.FK_GebruikerPunten_Gever" ManuallyRouted="false" />
+        <AssociationConnector Association="MeowMeowBeenzDbModel.FK_GebruikerPunten_Ontvanger" ManuallyRouted="false" />
+        <AssociationConnector Association="MeowMeowBeenzDbModel.FK_GebruikerGroep_Groep" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

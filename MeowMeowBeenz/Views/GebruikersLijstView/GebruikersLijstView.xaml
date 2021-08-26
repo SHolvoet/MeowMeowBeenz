@@ -1,0 +1,39 @@
+﻿<Window x:Class="MeowMeowBeenz.Views.GebruikersLijstView.GebruikersLijstView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MeowMeowBeenz.Views.GebruikersLijstView"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Gebruikers" x:Name="GebruikersLijstWindow" Height="900" Width="500" FontSize="30">
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/BGEmpty.png"/>
+    </Window.Background>
+    
+    <StackPanel Width="400" VerticalAlignment="Center">
+       <Label x:Name="lblBenaming" Content="Zoek Meowmeow" Background="#FFFFFF" HorizontalContentAlignment="Center"/>
+       
+        <StackPanel Margin="0, 30">
+            <DataGrid Height="500" IsReadOnly="true" AutoGenerateColumns="False" AlternatingRowBackground="Beige" HorizontalContentAlignment="Center"
+                      ItemsSource="{Binding Leden}" SelectedItem="{Binding GeselecteerdeGebruiker}">
+                <DataGrid.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding BekijkGebruikerCommand}"/>
+                </DataGrid.InputBindings>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Gebruiker" Width="200" Binding="{Binding Gebruikersnaam}"/>
+                    <DataGridTextColumn Header="Punten" Width="200" Binding="{Binding Punten}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <Button x:Name="btnAnnuleren" Margin="10" MinHeight="40" Background="#FF241F21" BorderBrush="#FF241F21" FontSize="20" HorizontalAlignment="center" Content="Terug"
+                    Command="{Binding AnnuleerCommand}" CommandParameter="{Binding ElementName=GebruikersLijstWindow}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

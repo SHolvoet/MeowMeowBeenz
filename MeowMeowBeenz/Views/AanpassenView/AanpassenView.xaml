@@ -1,0 +1,51 @@
+﻿<Window x:Name="AanpassenWindow"
+        x:Class="MeowMeowBeenz.Views.AanpassenView.AanpassenView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Height="900"
+        Width="500" 
+        Title="Gebruiker aanpassen">
+
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/BGTitle.png"/>
+    </Window.Background>
+    
+    <Grid x:Name="RegistrerenViewgrid">
+        
+        <Grid Width="350" Height="550" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,90" Background="#FFFFFF">
+            <Label Content="NIEUWE GEGEVENS" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+            <StackPanel Margin="30,30,30,0" VerticalAlignment="Top">
+                <TextBox x:Name="tbxGbnaam" Text="{Binding TempGebruiker.Gebruikersnaam}" Margin="0,5" materialDesign:HintAssist.Hint="{Binding GeselecteerdeGebruiker.Gebruikersnaam}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontStyle="Normal" FontSize="15"/>
+                <TextBox x:Name="tbxVoornaam" Text="{Binding TempGebruiker.Voornaam}" Margin="0,5" materialDesign:HintAssist.Hint="{Binding GeselecteerdeGebruiker.Voornaam}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontStyle="Normal" FontSize="15"/>
+                <TextBox x:Name="tbxFamilienaam" Text="{Binding TempGebruiker.Familienaam}" Margin="0,5" materialDesign:HintAssist.Hint="{Binding GeselecteerdeGebruiker.Familienaam}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontStyle="Normal" FontSize="15"/>
+                <ComboBox x:Name="cbGeslachten" SelectedValuePath="Content" SelectedValue="{Binding TempGebruiker.Geslacht}" IsEditable="True" IsReadOnly="True" materialDesign:HintAssist.Hint="{Binding GeselecteerdeGebruiker.Geslacht}" FontSize="15" Margin="0,13,0,0" >
+                    <ComboBox.Foreground>
+                        <SolidColorBrush Color="Black" Opacity="0.7"/>
+                    </ComboBox.Foreground>
+                    <ComboBoxItem Content="Man"/>
+                    <ComboBoxItem Content="Vrouw"/>
+                    <ComboBoxItem Content="Neutraal"/>
+                </ComboBox>
+                <TextBox x:Name="tbxEmailadres" Text="{Binding TempGebruiker.Emailadres}" Margin="0,5" materialDesign:HintAssist.Hint="{Binding GeselecteerdeGebruiker.Emailadres}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontStyle="Normal" FontSize="15"/>
+
+                <PasswordBox x:Name="tbxOldWachtwoord"  Margin="0,5" materialDesign:HintAssist.Hint="OUD WACHTWOORD" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontStyle="Normal" FontSize="15" PasswordChanged="PasswordBox_OnPasswordChangedOld"/>
+                <PasswordBox x:Name="tbxNewWachtwoord"  Margin="0,5" materialDesign:HintAssist.Hint="NIEUW WACHTWOORD" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontStyle="Normal" FontSize="15" PasswordChanged="PasswordBox_OnPasswordChangedNew"/>
+                <PasswordBox x:Name="tbxConfirmedWachtwoord"  Margin="0,5" materialDesign:HintAssist.Hint="BEVESTIG WACHTWOORD" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontStyle="Normal" FontSize="15" PasswordChanged="PasswordBox_OnPasswordChangedConfirmed"/>
+                <Label  VerticalAlignment="Bottom" Height="50"  Content="{Binding FoutBoodschap}" Foreground="Red" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5" >
+                <Button x:Name="btnLogin" Content="Aanpassen" Margin="10" Command="{Binding AanpassenCommand}" CommandParameter="{Binding ElementName=AanpassenWindow}" Background="#FF241F21" BorderBrush="#FF241F21" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Height="auto"/>
+                <Button x:Name="btnRegistreren" Content="Annuleren" Margin="10" Command="{Binding AnnulerenCommand}" CommandParameter="{Binding ElementName=AanpassenWindow}" Background="#FF241F21" BorderBrush="#FF241F21" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Height="auto"/>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Window>

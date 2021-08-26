@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MeowMeowBeenzDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Gebruiker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gebruikersnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Voornaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Familienaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Geslacht" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Emailadres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Wachtwoord" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Profielfoto" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GebruikerGroep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GebruikerId" Type="int" Nullable="false" />
+          <Property Name="GroepId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GebruikerPunten">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GeverId" Type="int" Nullable="false" />
+          <Property Name="OntvangerId" Type="int" Nullable="false" />
+          <Property Name="Punten" Type="int" />
+        </EntityType>
+        <EntityType Name="Groep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Groepsnaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_GebruikerGroep_Gebruiker">
+          <End Role="Gebruiker" Type="Self.Gebruiker" Multiplicity="1" />
+          <End Role="GebruikerGroep" Type="Self.GebruikerGroep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GebruikerGroep">
+              <PropertyRef Name="GebruikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GebruikerGroep_Groep">
+          <End Role="Groep" Type="Self.Groep" Multiplicity="1" />
+          <End Role="GebruikerGroep" Type="Self.GebruikerGroep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GebruikerGroep">
+              <PropertyRef Name="GroepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GebruikerPunten_Gever">
+          <End Role="Gebruiker" Type="Self.Gebruiker" Multiplicity="1" />
+          <End Role="GebruikerPunten" Type="Self.GebruikerPunten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GebruikerPunten">
+              <PropertyRef Name="GeverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GebruikerPunten_Ontvanger">
+          <End Role="Gebruiker" Type="Self.Gebruiker" Multiplicity="1" />
+          <End Role="GebruikerPunten" Type="Self.GebruikerPunten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GebruikerPunten">
+              <PropertyRef Name="OntvangerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MeowMeowBeenzDbModelStoreContainer">
+          <EntitySet Name="Gebruiker" EntityType="Self.Gebruiker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GebruikerGroep" EntityType="Self.GebruikerGroep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GebruikerPunten" EntityType="Self.GebruikerPunten" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groep" EntityType="Self.Groep" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GebruikerGroep_Gebruiker" Association="Self.FK_GebruikerGroep_Gebruiker">
+            <End Role="Gebruiker" EntitySet="Gebruiker" />
+            <End Role="GebruikerGroep" EntitySet="GebruikerGroep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GebruikerGroep_Groep" Association="Self.FK_GebruikerGroep_Groep">
+            <End Role="Groep" EntitySet="Groep" />
+            <End Role="GebruikerGroep" EntitySet="GebruikerGroep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GebruikerPunten_Gever" Association="Self.FK_GebruikerPunten_Gever">
+            <End Role="Gebruiker" EntitySet="Gebruiker" />
+            <End Role="GebruikerPunten" EntitySet="GebruikerPunten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GebruikerPunten_Ontvanger" Association="Self.FK_GebruikerPunten_Ontvanger">
+            <End Role="Gebruiker" EntitySet="Gebruiker" />
+            <End Role="GebruikerPunten" EntitySet="GebruikerPunten" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MeowMeowBeenzDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Gebruiker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Gebruikersnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Familienaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Emailadres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Wachtwoord" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GebruikerGroep" Relationship="Self.FK_GebruikerGroep_Gebruiker" FromRole="Gebruiker" ToRole="GebruikerGroep" />
+          <NavigationProperty Name="GebruikerPunten" Relationship="Self.FK_GebruikerPunten_Gever" FromRole="Gebruiker" ToRole="GebruikerPunten" />
+          <NavigationProperty Name="GebruikerPunten1" Relationship="Self.FK_GebruikerPunten_Ontvanger" FromRole="Gebruiker" ToRole="GebruikerPunten" />
+          <Property Name="Geslacht" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Profielfoto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GebruikerGroep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="GebruikerId" Type="Int32" Nullable="false" />
+          <Property Name="GroepId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gebruiker" Relationship="Self.FK_GebruikerGroep_Gebruiker" FromRole="GebruikerGroep" ToRole="Gebruiker" />
+          <NavigationProperty Name="Groep" Relationship="Self.FK_GebruikerGroep_Groep" FromRole="GebruikerGroep" ToRole="Groep" />
+        </EntityType>
+        <EntityType Name="GebruikerPunten">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="GeverId" Type="Int32" Nullable="false" />
+          <Property Name="OntvangerId" Type="Int32" Nullable="false" />
+          <Property Name="Punten" Type="Int32" />
+          <NavigationProperty Name="Gebruiker" Relationship="Self.FK_GebruikerPunten_Gever" FromRole="GebruikerPunten" ToRole="Gebruiker" />
+          <NavigationProperty Name="Gebruiker1" Relationship="Self.FK_GebruikerPunten_Ontvanger" FromRole="GebruikerPunten" ToRole="Gebruiker" />
+        </EntityType>
+        <EntityType Name="Groep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Groepsnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GebruikerGroep" Relationship="Self.FK_GebruikerGroep_Groep" FromRole="Groep" ToRole="GebruikerGroep" />
+        </EntityType>
+        <Association Name="FK_GebruikerGroep_Gebruiker">
+          <End Role="Gebruiker" Type="Self.Gebruiker" Multiplicity="1" />
+          <End Role="GebruikerGroep" Type="Self.GebruikerGroep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GebruikerGroep">
+              <PropertyRef Name="GebruikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GebruikerPunten_Gever">
+          <End Role="Gebruiker" Type="Self.Gebruiker" Multiplicity="1" />
+          <End Role="GebruikerPunten" Type="Self.GebruikerPunten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GebruikerPunten">
+              <PropertyRef Name="GeverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GebruikerPunten_Ontvanger">
+          <End Role="Gebruiker" Type="Self.Gebruiker" Multiplicity="1" />
+          <End Role="GebruikerPunten" Type="Self.GebruikerPunten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gebruiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GebruikerPunten">
+              <PropertyRef Name="OntvangerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GebruikerGroep_Groep">
+          <End Role="Groep" Type="Self.Groep" Multiplicity="1" />
+          <End Role="GebruikerGroep" Type="Self.GebruikerGroep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GebruikerGroep">
+              <PropertyRef Name="GroepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MeowMeowBeenzDbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Gebruiker" EntityType="Self.Gebruiker" />
+          <EntitySet Name="GebruikerGroep" EntityType="Self.GebruikerGroep" />
+          <EntitySet Name="GebruikerPunten" EntityType="Self.GebruikerPunten" />
+          <EntitySet Name="Groep" EntityType="Self.Groep" />
+          <AssociationSet Name="FK_GebruikerGroep_Gebruiker" Association="Self.FK_GebruikerGroep_Gebruiker">
+            <End Role="Gebruiker" EntitySet="Gebruiker" />
+            <End Role="GebruikerGroep" EntitySet="GebruikerGroep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GebruikerPunten_Gever" Association="Self.FK_GebruikerPunten_Gever">
+            <End Role="Gebruiker" EntitySet="Gebruiker" />
+            <End Role="GebruikerPunten" EntitySet="GebruikerPunten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GebruikerPunten_Ontvanger" Association="Self.FK_GebruikerPunten_Ontvanger">
+            <End Role="Gebruiker" EntitySet="Gebruiker" />
+            <End Role="GebruikerPunten" EntitySet="GebruikerPunten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GebruikerGroep_Groep" Association="Self.FK_GebruikerGroep_Groep">
+            <End Role="Groep" EntitySet="Groep" />
+            <End Role="GebruikerGroep" EntitySet="GebruikerGroep" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MeowMeowBeenzDbModelStoreContainer" CdmEntityContainer="MeowMeowBeenzDbEntities1">
+          <EntitySetMapping Name="Gebruiker">
+            <EntityTypeMapping TypeName="MeowMeowBeenzDbModel.Gebruiker">
+              <MappingFragment StoreEntitySet="Gebruiker">
+                <ScalarProperty Name="Profielfoto" ColumnName="Profielfoto" />
+                <ScalarProperty Name="Geslacht" ColumnName="Geslacht" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Gebruikersnaam" ColumnName="Gebruikersnaam" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Familienaam" ColumnName="Familienaam" />
+                <ScalarProperty Name="Emailadres" ColumnName="Emailadres" />
+                <ScalarProperty Name="Wachtwoord" ColumnName="Wachtwoord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GebruikerGroep">
+            <EntityTypeMapping TypeName="MeowMeowBeenzDbModel.GebruikerGroep">
+              <MappingFragment StoreEntitySet="GebruikerGroep">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GebruikerId" ColumnName="GebruikerId" />
+                <ScalarProperty Name="GroepId" ColumnName="GroepId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GebruikerPunten">
+            <EntityTypeMapping TypeName="MeowMeowBeenzDbModel.GebruikerPunten">
+              <MappingFragment StoreEntitySet="GebruikerPunten">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GeverId" ColumnName="GeverId" />
+                <ScalarProperty Name="OntvangerId" ColumnName="OntvangerId" />
+                <ScalarProperty Name="Punten" ColumnName="Punten" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groep">
+            <EntityTypeMapping TypeName="MeowMeowBeenzDbModel.Groep">
+              <MappingFragment StoreEntitySet="Groep">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Groepsnaam" ColumnName="Groepsnaam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
